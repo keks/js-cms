@@ -1,0 +1,62 @@
+<html>
+<head>
+<script src="http://code.jquery.com/jquery-latest.js"></script>
+<script src="http://documentcloud.github.com/underscore/underscore-min.js"></script>
+
+<script>
+var menu={
+  "gallerien": {
+    "2009": [ "bild1.jpg", "bild2.jpg"],
+  }
+};
+
+
+
+$(document).ready( function() {
+
+  _.each( _.keys(menu), function(key){
+    $("#menu").append('<a href="#'+key.toLowerCase()+'" class="link">' + key + "</a>");
+  });
+
+  $("#menu a.link").click(function(){ 
+    _.each(_.keys(menu[this.toString().split("#")[1]]), function(item){
+      $("#lowermenu").append('<a href="#" class="link">' + item + "</a>");
+    });
+  });
+  
+  $("#lowermenu a.link").click(function(){
+    alert(1);
+    $("#content").text("abc");
+  });
+
+  $("#link-bilder").click(function(){
+    $("#content").text("bilder");
+  });
+
+  $("#link-info").click(function(){
+    $("#content").text("info");
+  });
+  /*
+  $(#content).galleria({
+    dataSource: _.map(arrays, function(str){ 
+      return {image: str}; 
+    });
+  });
+  */
+});
+
+
+</script>
+</head>
+<body>
+
+<div id="menu">
+</div>
+
+<div id="lowermenu">
+</div>
+
+<div id="content">
+</div>
+
+</body>
