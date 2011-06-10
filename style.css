@@ -1,0 +1,51 @@
+body{
+  margin:none;
+  padding:none;
+  background-color: black;
+  font-family: sans-serif;
+  color: #aaa;
+  text-transform: uppercase;
+  margin: 0 100px 0 100px;
+}
+h1{
+  font-weight: light;
+  
+  }
+a{
+  color: #aaa;
+  text-decoration: none;
+}
+a:visited {
+  color: #aaa;
+}
+
+a:hover {
+  color: #fff;
+}
+
+#menu a, #lowermenu a{
+  margin-right: 10px;
+}
+
+#menu, #lowermenu{
+  margin:5px;
+}
+
+#content{
+  height: 73%;
+  margin:0;
+}
+#content > div{
+  height: 100%;
+  width: 100%;
+  display:none;
+}
+#content div.show{
+  display: block;
+}
+
+
+#content {
+  width: 100%;
+}
+
