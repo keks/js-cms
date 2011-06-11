@@ -37,18 +37,30 @@ $(document).ready( function() {
 
 
   }()
-
-
+  
+  // hide intro
+  $("body").click(function () { 
+    $("#intro-div").animate({height: "0", "padding-bottom": "0%", "padding-top": "0%"}, 600, function () { $("#intro-div").css({ 'border-top': '0px'}) });
+   })
+  
   var hasBeenClicked=[];
   // restore state when we load the page
-  $(window).bind("popstate", function(){
+  $(window).bind("load popstate", function(){
     var path = location.hash.substr(2);
-    breadcrumb = path.split('/');
+    var breadcrumb = path.split('/');
     
+    a = {};
+
+    if(JSON.stringify(breadcrumb) == JSON.stringify([""])){
+    console.log(breadcrumb);
+      $("#intro-div").css({"height": "auto"});
+    }
+        
     //jQuery workaround, set the same duration for fadeOut and timeout for fadeIn
     $("#lowermenu a").fadeOut( 200);
     setTimeout(function(){
       $("#lowermenu a.menu-"+breadcrumb[0]).fadeIn();
+      $("#content div").fadeOut();
     }, 200)
 
     // we have clicked a #lowermenu link yet
@@ -56,8 +68,9 @@ $(document).ready( function() {
       $("#content div").fadeOut(200);
       
       setTimeout(function(){
-          if(breadcrumb[0] === "gallerien") //TODO: remove hardcode
+          if(breadcrumb[0] === "galleries") //TODO: remove hardcode
             console.log($("#"+breadcrumb[0]+"-"+breadcrumb[1]).galleria({
+              width: "600px",
               extend: function(){
                   if(hasBeenClicked.indexOf(path) !== -1){
                     this.splice(0,1);
