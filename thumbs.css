@@ -1,4 +1,4 @@
-div.griditem {
+#content > div> div.griditem {
   padding:0;
   width: 390px;
   height: 219px;
@@ -14,32 +14,6 @@ div.griditem {
   float: left;
 }
 
-#content > div.griditem {
-  padding:0;
-  width: 390px;
-  height: 219px;
-  display:block;
-
-  margin: 20px;
-
-  border: 1px solid #ccc;
-
-  background-color: #eee;
-  color: #333;
-
-  float: left;
-}
-
-#content > div.griditem img{
-  background-color: black;
-  position: absolute;
-  x:0;
-  y:0;
-  width: 390px;
-  height: 219px;
-
-  z-index:2;
-}
 
 
 div.griditem img{
@@ -51,22 +25,6 @@ div.griditem img{
   height: 219px;
 
   z-index:2;
-}
-
-#content > div.griditem p {
-  margin:0;
-
-  width: 380px;
-  height: 219px;
-
-  line-height:231px;
-  vertical-align: middle;
-
-  text-align: center;
-  text-transform: uppercase;
-
-  font-size: 2.5em;
-  font-family: Sans;
 }
 
 

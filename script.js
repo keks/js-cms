@@ -4,28 +4,47 @@ $(document).ready( function() {
   var breadcrumb=[];
 
 
+  //make menu entries
   var menufy = function(){
     $("#menu").empty()
     var menu=[];
     var lowermenu=[];
-    _.each( $("#content div"),
-      function(e) {
+    $.each( $("#content div"),
+      function(i, e) {
         split = e.id.split('-');
+
+        //don't make menu entries for thumbnails
+        if( split[0] === "thumbs" ) return;
 
         var menulink=$('<a href="#!'+split[0]+'">'+split[0]+"</a>");
         var lowermenulink=$('<a class="menu-'+split[0]+'" href="#!'+split[0]+'/'+split[1]+'">'+split[1]+"</a>");
+        var thumbdiv=$('<div id="thumbs-'+split[0]+'" />')
 
         if(menu.indexOf(menulink.html()) === -1){
-          $("#menu")
-          .append(
+          $("#menu").append(
             menulink[0]
           );
+
           menu.push(menulink.html());
         }
 
+        thumbTarget = $("div#thumbs-"+split[0]);
+        if( thumbTarget.length ===0  ){
+          thumbTarget=thumbdiv.thumb();
+          $("#content").append(
+            thumbTarget
+          );
+        }
+        Thumb.get(thumbTarget).addJSON(
+        [{
+          "id": "thumb-"+split[0]+"-"+split[1],
+          "src": $(e).attr('thumb'),
+          "txt": $(e).attr('alt')
+          }])
+
+
         if(lowermenu.indexOf(lowermenulink.html()) == -1){
-          $("#lowermenu")
-          .append(
+          $("#lowermenu").append(
             lowermenulink[0]
           );
           lowermenu.push(lowermenulink.html());
@@ -52,7 +71,6 @@ $(document).ready( function() {
     a = {};
 
     if(JSON.stringify(breadcrumb) == JSON.stringify([""])){
-    console.log(breadcrumb);
       $("#intro-div").css({"height": "auto"});
     }
         
@@ -63,13 +81,13 @@ $(document).ready( function() {
       $("#content div").fadeOut();
     }, 200)
 
+    $("#content div").fadeOut(200);
     // we have clicked a #lowermenu link yet
     if(breadcrumb[1] !== undefined){
-      $("#content div").fadeOut(200);
       
       setTimeout(function(){
           if(breadcrumb[0] === "galleries") //TODO: remove hardcode
-            console.log($("#"+breadcrumb[0]+"-"+breadcrumb[1]).galleria({
+            $("#"+breadcrumb[0]+"-"+breadcrumb[1]).galleria({
               width: "600px",
               extend: function(){
                   if(hasBeenClicked.indexOf(path) !== -1){
@@ -80,10 +98,16 @@ $(document).ready( function() {
                   
                 }
               
-              }));
+              });
             //.splice(0,1);
           $("#"+breadcrumb[0]+"-"+breadcrumb[1]).fadeIn();
       }, 201)
+    } else {
+      setTimeout(function(){
+        $("#thumbs-"+breadcrumb[0]).fadeIn().show();
+      }, 201)
+
+
     }
     
   });
