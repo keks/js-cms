@@ -75,36 +75,38 @@ $(document).ready( function() {
     }
         
     //jQuery workaround, set the same duration for fadeOut and timeout for fadeIn
-    $("#lowermenu a").fadeOut( 200);
+    $("#lowermenu a").not($("#lowermenu a.menu-"+breadcrumb[0])).fadeOut( 200);
     setTimeout(function(){
       $("#lowermenu a.menu-"+breadcrumb[0]).fadeIn();
-      $("#content div").fadeOut();
     }, 200)
 
     $("#content div").fadeOut(200);
-    // we have clicked a #lowermenu link yet
+
+    // we have clicked a #lowermenu link
     if(breadcrumb[1] !== undefined){
       
       setTimeout(function(){
-          if(breadcrumb[0] === "galleries") //TODO: remove hardcode
-            $("#"+breadcrumb[0]+"-"+breadcrumb[1]).galleria({
-              width: "600px",
-              extend: function(){
-                  if(hasBeenClicked.indexOf(path) !== -1){
-                    this.splice(0,1);
-                  }else{
-                    hasBeenClicked.push(path)
-                  }
-                  
-                }
-              
-              });
-            //.splice(0,1);
-          $("#"+breadcrumb[0]+"-"+breadcrumb[1]).fadeIn();
+        if(breadcrumb[0] === "galleries") { //TODO: remove hardcode
+          $("#"+breadcrumb[0]+"-"+breadcrumb[1]).galleria({
+            width: "600px",
+            extend: function(){
+              if(hasBeenClicked.indexOf(path) !== -1){
+                this.splice(0,1);
+              }else{
+                hasBeenClicked.push(path)
+              }
+                
+            }
+            
+          });
+        }
+        $("#"+breadcrumb[0]+"-"+breadcrumb[1]).fadeIn();
       }, 201)
     } else {
+      console.log("setting timer to show #thumbs-" + breadcrumb[0]);
       setTimeout(function(){
-        $("#thumbs-"+breadcrumb[0]).fadeIn().show();
+        console.log("fading in #thumbs-" + breadcrumb[0]);
+        $("#content div#thumbs-"+breadcrumb[0] + " *, #content div#thumbs-"+breadcrumb[0]).fadeIn();
       }, 201)
 
 
