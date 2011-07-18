@@ -39,7 +39,8 @@ $(document).ready( function() {
         [{
           "id": "thumb-"+split[0]+"-"+split[1],
           "src": $(e).attr('thumb'),
-          "txt": $(e).attr('alt')
+          "txt": $(e).attr('alt'),
+          "href": "#!"+split[0]+'/'+split[1]
           }])
 
 

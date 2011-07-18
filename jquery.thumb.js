@@ -19,7 +19,8 @@
   Thumb.prototype.addJSON = function(json){
     var self = this;
     $.each(json, function(i, item){
-      var img = $('<img src="'+item.src+'" />"' );
+      console.log(self);
+      var img = $('<a href="'+item.href+'"><img src="'+item.src+'" /></a>' );
       var txt = $('<p>'+item.txt+'</p>');
       ret=$('<div class="griditem" id="'+item.id+'"/>')
         .append(img)
